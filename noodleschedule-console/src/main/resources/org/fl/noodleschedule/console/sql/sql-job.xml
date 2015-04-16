@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dynamic-hibernate>
+	<query name="job-query-page">
+	<![CDATA[
+		SELECT 
+				job_Id,
+				job_Name,
+				job_Type,
+				cron,
+				delay_Time,
+				route_Type,
+				exe_Timeout,
+				status,
+				description,
+				lastModified_Time,
+				method,
+				exe_Status,
+				exe_Retry,
+				timeout_Retry,
+				parent_Job_Id,
+				log_Id,
+				last_Alarm_Time,
+				is_Alarm,
+				is_Mail_Alarm,
+				is_Sms_Alarm,
+				max_Interval_Time
+		FROM 	JC_JOB
+		WHERE 	1=1
+				#if($job_Id)
+					AND job_Id = :job_Id
+				#end
+		 		#if($job_Name)
+					AND job_Name LIKE :job_Name
+				#end
+				#if($job_Type)
+					AND job_Type = :job_Type
+				#end
+				#if($route_Type)
+					AND route_Type = :route_Type
+				#end
+				#if($method)
+					AND method = :method
+				#end
+				#if($exe_Status)
+					AND exe_Status = :exe_Status
+				#end
+				#if($parent_Job_Id)
+					AND parent_Job_Id = :parent_Job_Id
+				#end
+				#if($status)
+					AND status = :status
+				#end
+				#if($is_Alarm)
+					AND is_Alarm = :is_Alarm
+				#end
+				#if($is_Mail_Alarm)
+					AND is_Mail_Alarm = :is_Mail_Alarm
+				#end
+				#if($is_Sms_Alarm)
+					AND is_Sms_Alarm = :is_Sms_Alarm
+				#end
+		ORDER BY job_Id DESC
+	]]>
+	</query>
+	
+	<query name="job-query-list">
+	<![CDATA[
+		SELECT 
+				job_Id,
+				job_Name,
+				job_Type,
+				cron,
+				delay_Time,
+				route_Type,
+				exe_Timeout,
+				status,
+				description,
+				lastModified_Time,
+				method,
+				exe_Status,
+				exe_Retry,
+				timeout_Retry,
+				parent_Job_Id,
+				log_Id,
+				last_Alarm_Time,
+				is_Alarm,
+				is_Mail_Alarm,
+				is_Sms_Alarm,
+				max_Interval_Time
+		FROM 	JC_JOB
+		WHERE 	1=1
+				#if($job_Id)
+					AND job_Id = :job_Id
+				#end
+		 		#if($job_Name)
+					AND job_Name = :job_Name
+				#end
+				#if($job_Type)
+					AND job_Type = :job_Type
+				#end
+				#if($route_Type)
+					AND route_Type = :route_Type
+				#end
+				#if($method)
+					AND method = :method
+				#end
+				#if($exe_Status)
+					AND exe_Status = :exe_Status
+				#end
+				#if($parent_Job_Id)
+					AND parent_Job_Id = :parent_Job_Id
+				#end
+				#if($status)
+					AND status = :status
+				#end
+				#if($is_Alarm)
+					AND is_Alarm = :is_Alarm
+				#end
+				#if($is_Mail_Alarm)
+					AND is_Mail_Alarm = :is_Mail_Alarm
+				#end
+				#if($is_Sms_Alarm)
+					AND is_Sms_Alarm = :is_Sms_Alarm
+				#end
+		ORDER BY job_Id DESC
+	]]>
+	</query>
+	
+	<query name="job-update-exestatus-by-exestatus">
+	<![CDATA[
+		UPDATE 	JC_JOB 
+		SET 	exe_Status = :exe_Status_New, log_Id = :log_Id
+		WHERE 	job_Id = :job_Id AND exe_Status = :exe_Status_Old
+	]]>
+	</query>
+	
+	<query name="job-update-exestatus-by-log">
+	<![CDATA[
+		UPDATE 	JC_JOB 
+		SET 	exe_Status = :exe_Status
+		WHERE 	job_Id = :job_Id AND log_Id = :log_Id
+	]]>
+	</query>
+	
+	<query name="job-update-delete-child-job">
+	<![CDATA[
+		UPDATE 	JC_JOB 
+		SET 	parent_Job_Id = NULL
+		WHERE 	parent_Job_Id = :parent_Job_Id
+	]]>
+	</query>
+
+</dynamic-hibernate>

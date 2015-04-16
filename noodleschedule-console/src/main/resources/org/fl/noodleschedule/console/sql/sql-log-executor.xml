@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dynamic-hibernate>
+	<query name="logexecutor-query-page">
+	<![CDATA[
+		SELECT 
+				log_Id,
+				executor_Id,
+				start_Time,
+				end_Time,
+				consume_Time,
+				exe_Status,
+				exception
+		FROM 	JC_LOG_EXECUTOR
+		WHERE 	1=1
+		ORDER BY log_Id, executor_Id
+	]]>
+	</query>
+	
+	<query name="logexecutor-query-list">
+	<![CDATA[
+		SELECT 
+				log_Id,
+				executor_Id,
+				start_Time,
+				end_Time,
+				consume_Time,
+				exe_Status,
+				exception
+		FROM 	JC_LOG_EXECUTOR
+		WHERE 	1=1
+		ORDER BY log_Id, executor_Id
+	]]>
+	</query>
+	
+	<query name="logexecutor-query-executor-by-log-page">
+	<![CDATA[
+		SELECT 
+				le.log_Id,
+				le.executor_Id,
+				le.start_Time,
+				le.end_Time,
+				le.consume_Time,
+				le.exe_Status,
+				le.exception,
+				e.executor_Name,
+				e.rpc_Type,
+				e.ip,
+				e.port,
+				e.url
+		FROM 	(SELECT * FROM JC_LOG_EXECUTOR where log_Id = :log_Id) le
+				LEFT JOIN JC_EXECUTOR e ON le.executor_Id = e.executor_Id
+		WHERE 	1=1
+		ORDER BY executor_Id
+	]]>
+	</query>
+	
+	<query name="logexecutor-query-list-by-log">
+	<![CDATA[
+		SELECT 
+				le.log_Id,
+				le.executor_Id,
+				le.start_Time,
+				le.end_Time,
+				le.consume_Time,
+				le.exe_Status,
+				e.executor_Name,
+				e.rpc_Type,
+				e.ip,
+				e.port,
+				e.url,
+				e.status
+		FROM 	( SELECT * FROM JC_LOG_EXECUTOR where log_Id = :log_Id) le
+		LEFT JOIN JC_EXECUTOR e
+		ON	le.executor_Id = e.executor_Id
+		WHERE 	1=1
+		AND le.exe_Status = :exe_Status
+		ORDER BY e.executor_Id
+	]]>
+	</query>
+	
+	<query name="logexecutor-query-list-complete">
+	<![CDATA[
+		SELECT 
+				le.log_Id,
+				le.executor_Id,
+				le.start_Time,
+				le.end_Time,
+				le.consume_Time,
+				le.exe_Status,
+				e.executor_Name,
+				e.rpc_Type,
+				e.ip,
+				e.port,
+				e.url,
+				e.status
+		FROM 	( SELECT * FROM JC_LOG_EXECUTOR where log_Id = :log_Id) le
+		LEFT JOIN JC_EXECUTOR e
+		ON	le.executor_Id = e.executor_Id
+		WHERE 	1=1
+		AND (le.exe_Status = :exe_Status_Run_Success OR le.exe_Status = :exe_Status_Run_Fail OR le.exe_Status = :exe_Status_Run_Disappear OR le.exe_Status = :exe_Status_No_Response OR le.exe_Status = :exe_Status_Manual_Stop)
+		ORDER BY e.executor_Id
+	]]>
+	</query>
+
+	<query name="logexecutor-update-statistical-time">
+	<![CDATA[
+		UPDATE 	JC_LOG_EXECUTOR 
+		SET 	end_Time = :end_Time, consume_Time = TIMESTAMPDIFF(SECOND, start_Time, :end_Time), exe_Status = :exe_Status 
+				#if($exception) 
+					, exception = :exception 
+				#end
+		WHERE 	log_Id = :log_Id AND executor_Id = :executor_Id
+	]]>
+	</query>
+	
+	<query name="logexecutor-delete-by-time">
+	<![CDATA[
+		DELETE	FROM 	JC_LOG_EXECUTOR 
+		WHERE 	start_Time < :start_Time
+	]]>
+	</query>
+
+</dynamic-hibernate>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dynamic-hibernate>
+	<query name="jobexecutor-query-page">
+	<![CDATA[
+		SELECT 
+				job_Id,
+				executor_Id,
+				weight,
+				exe_Index
+		FROM 	JC_JOB_EXECUTOR
+		WHERE 	1=1
+		ORDER BY job_Id, executor_Id
+	]]>
+	</query>
+	
+	<query name="jobexecutor-query-list">
+	<![CDATA[
+		SELECT 
+				job_Id,
+				executor_Id,
+				weight,
+				exe_Index
+		FROM 	JC_JOB_EXECUTOR
+		WHERE 	1=1
+		ORDER BY job_Id, executor_Id
+	]]>
+	</query>
+	
+	<query name="jobexecutor-query-include-page">
+	<![CDATA[
+		SELECT 
+				je.job_Id,
+				je.executor_Id,
+				je.weight,
+				je.exe_Index,
+				e.executor_Name,
+				e.rpc_Type,
+				e.ip,
+				e.port,
+				e.url,
+				e.status
+		FROM 	JC_EXECUTOR e
+				INNER JOIN (SELECT * FROM JC_JOB_EXECUTOR WHERE job_Id = :job_Id) je 
+				ON e.executor_Id = je.executor_Id
+		WHERE 	1=1
+				#if($executor_Id)
+					AND e.executor_Id = :executor_Id
+				#end
+		 		#if($executor_Name)
+					AND e.executor_Name LIKE :executor_Name
+				#end
+				#if($rpc_Type)
+					AND e.rpc_Type = :rpc_Type
+				#end
+				#if($ip)
+					AND e.ip LIKE :ip
+				#end
+				#if($port)
+					AND e.port = :port
+				#end
+				#if($url)
+					AND e.url LIKE :url
+				#end
+				#if($status)
+					AND e.status = :status
+				#end
+		ORDER BY je.exe_Index
+	]]>
+	</query>
+	
+	<query name="jobexecutor-query-exclude-page">
+	<![CDATA[
+		SELECT 
+				e.executor_Id,
+				e.executor_Name,
+				e.rpc_Type,
+				e.ip,
+				e.port,
+				e.url,
+				e.status				
+		FROM 	JC_EXECUTOR e
+		WHERE 	1=1
+				#if($executor_Id)
+					AND e.executor_Id = :executor_Id
+				#end
+		 		#if($executor_Name)
+					AND e.executor_Name LIKE :executor_Name
+				#end
+				#if($rpc_Type)
+					AND e.rpc_Type = :rpc_Type
+				#end
+				#if($ip)
+					AND e.ip LIKE :ip
+				#end
+				#if($port)
+					AND e.port = :port
+				#end
+				#if($url)
+					AND e.url LIKE :url
+				#end
+				#if($status)
+					AND e.status = :status
+				#end
+				AND e.executor_Id NOT IN (SELECT executor_Id FROM JC_JOB_EXECUTOR WHERE job_Id = :job_Id)
+		ORDER BY e.executor_Id
+	]]>
+	</query>
+	
+	<query name="jobexecutor-query-executor-list-by-job">
+	<![CDATA[
+		SELECT 
+				je.job_Id,
+				je.executor_Id,
+				je.weight,
+				je.exe_Index,
+				e.executor_Name,
+				e.rpc_Type,
+				e.ip,
+				e.port,
+				e.url,
+				e.status
+		FROM 	( SELECT * FROM JC_JOB_EXECUTOR where job_Id = :job_Id) je
+		LEFT JOIN JC_EXECUTOR e
+		ON	je.executor_Id = e.executor_Id
+		WHERE 	1=1
+		AND e.status = :status
+		ORDER BY e.executor_Id
+	]]>
+	</query>
+
+</dynamic-hibernate>

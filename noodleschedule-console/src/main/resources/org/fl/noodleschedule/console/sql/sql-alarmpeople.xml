@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dynamic-hibernate>
+	<query name="alarmpeople-query-page">
+	<![CDATA[
+		SELECT 
+				alarmPeople_Id,
+				alarmPeople_Name,
+				email,
+				phone,
+				status
+		FROM 	JC_ALARMPEOPLE
+		WHERE 	1=1
+				#if($alarmPeople_Id)
+					AND alarmPeople_Id = :alarmPeople_Id
+				#end
+		 		#if($alarmPeople_Name)
+					AND alarmPeople_Name LIKE :alarmPeople_Name
+				#end
+				#if($email)
+					AND email LIKE :email
+				#end
+				#if($phone)
+					AND phone LIKE :phone
+				#end
+				#if($status)
+					AND status = :status
+				#end
+		ORDER BY alarmPeople_Id DESC
+	]]>
+	</query>
+	
+	<query name="alarmpeople-query-list">
+	<![CDATA[
+		SELECT 
+				alarmPeople_Id,
+				alarmPeople_Name,
+				email,
+				phone,
+				status
+		FROM 	JC_ALARMPEOPLE
+		WHERE 	1=1
+		 		#if($alarmPeople_Id)
+					AND alarmPeople_Name = :alarmPeople_Name
+				#end
+		 		#if($alarmpeople_Name)
+					AND alarmpeople_Name = :alarmpeople_Name
+				#end
+				#if($email)
+					AND email = :email
+				#end
+				#if($phone)
+					AND phone = :phone
+				#end
+				#if($status)
+					AND status = :status
+				#end
+		ORDER BY alarmPeople_Id DESC
+	]]>
+	</query>
+
+</dynamic-hibernate>

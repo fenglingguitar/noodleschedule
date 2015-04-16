@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dynamic-hibernate>
+	<query name="executor-query-page">
+	<![CDATA[
+		SELECT 
+				executor_Id,
+				executor_Name,
+				rpc_Type,
+				ip,
+				port,
+				url,
+				status				
+		FROM 	JC_EXECUTOR
+		WHERE 	1=1
+				#if($executor_Id)
+					AND executor_Id = :executor_Id
+				#end
+		 		#if($executor_Name)
+					AND executor_Name LIKE :executor_Name
+				#end
+				#if($rpc_Type)
+					AND rpc_Type = :rpc_Type
+				#end
+				#if($ip)
+					AND ip LIKE :ip
+				#end
+				#if($port)
+					AND port = :port
+				#end
+				#if($url)
+					AND url LIKE :url
+				#end
+				#if($status)
+					AND status = :status
+				#end
+		ORDER BY executor_Id DESC
+	]]>
+	</query>
+	
+	<query name="executor-query-list">
+	<![CDATA[
+		SELECT 
+				executor_Id,
+				executor_Name,
+				rpc_Type,
+				ip,
+				port,
+				url,
+				status
+		FROM 	JC_EXECUTOR
+		WHERE 	1=1
+		 		#if($executor_Id)
+					AND executor_Id = :executor_Id
+				#end
+		 		#if($executor_Name)
+					AND executor_Name = :executor_Name
+				#end
+				#if($rpc_Type)
+					AND rpc_Type = :rpc_Type
+				#end
+				#if($ip)
+					AND ip = :ip
+				#end
+				#if($port)
+					AND port = :port
+				#end
+				#if($url)
+					AND url = :url
+				#end
+				#if($status)
+					AND status = :status
+				#end
+		ORDER BY executor_Id DESC
+	]]>
+	</query>
+
+</dynamic-hibernate>

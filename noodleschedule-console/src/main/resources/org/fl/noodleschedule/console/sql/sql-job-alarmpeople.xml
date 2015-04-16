@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dynamic-hibernate>
+	<query name="jobalarmpeople-query-page">
+	<![CDATA[
+		SELECT 
+				job_Id,
+				alarmPeople_Id
+		FROM 	JC_JOB_ALARMPEOPLE
+		WHERE 	1=1
+		ORDER BY job_Id, alarmPeople_Id
+	]]>
+	</query>
+	
+	<query name="jobalarmpeople-query-list">
+	<![CDATA[
+		SELECT 
+				job_Id,
+				alarmPeople_Id
+		FROM 	JC_JOB_ALARMPEOPLE
+		WHERE 	1=1
+		ORDER BY job_Id, alarmPeople_Id
+	]]>
+	</query>
+	
+	<query name="jobalarmpeople-query-include-page">
+	<![CDATA[
+		SELECT 
+				ja.job_Id,
+				a.alarmPeople_Id,
+				a.alarmPeople_Name,
+				a.email,
+				a.phone,
+				a.status
+		FROM 	JC_ALARMPEOPLE a
+				INNER JOIN (SELECT * FROM JC_JOB_ALARMPEOPLE WHERE job_Id = :job_Id) ja 
+				ON a.alarmPeople_Id = ja.alarmPeople_Id
+		WHERE 	1=1
+				#if($alarmPeople_Id)
+					AND a.alarmPeople_Id = :alarmPeople_Id
+				#end
+		 		#if($alarmPeople_Name)
+					AND a.alarmPeople_Name LIKE :alarmPeople_Name
+				#end
+				#if($email)
+					AND a.email LIKE :email
+				#end
+				#if($phone)
+					AND a.phone LIKE :phone
+				#end
+				#if($status)
+					AND a.status = :status
+				#end
+		ORDER BY a.alarmPeople_Id
+	]]>
+	</query>
+	
+	<query name="jobalarmpeople-query-exclude-page">
+	<![CDATA[
+		SELECT 
+				a.alarmPeople_Id,
+				a.alarmPeople_Name,
+				a.email,
+				a.phone,
+				a.status				
+		FROM 	JC_ALARMPEOPLE a
+		WHERE 	1=1
+				#if($alarmPeople_Id)
+					AND a.alarmPeople_Id = :alarmPeople_Id
+				#end
+		 		#if($alarmPeople_Name)
+					AND a.alarmPeople_Name LIKE :alarmPeople_Name
+				#end
+				#if($email)
+					AND a.email LIKE :email
+				#end
+				#if($phone)
+					AND a.phone LIKE :phone
+				#end
+				#if($status)
+					AND a.status = :status
+				#end
+				AND a.alarmPeople_Id NOT IN (SELECT alarmPeople_Id FROM JC_JOB_ALARMPEOPLE WHERE job_Id = :job_Id)
+		ORDER BY a.alarmPeople_Id
+	]]>
+	</query>
+	
+	<query name="jobalarmpeople-query-list-by-job">
+	<![CDATA[
+		SELECT 
+				ja.job_Id,
+				ja.alarmPeople_Id,
+				a.alarmPeople_Name,
+				a.email,
+				a.phone
+		FROM 	(SELECT * FROM JC_JOB_ALARMPEOPLE WHERE job_Id = :job_Id) ja
+				LEFT JOIN JC_ALARMPEOPLE a ON ja.alarmPeople_Id = a.alarmPeople_Id
+		WHERE 	1=1
+		ORDER BY ja.alarmPeople_Id
+	]]>
+	</query>
+
+</dynamic-hibernate>

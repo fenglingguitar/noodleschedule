@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dynamic-hibernate>
+	<query name="log-query-page">
+	<![CDATA[
+		SELECT 
+				log_Id,
+				trigger_Time,
+				start_Time,
+				end_Time,
+				consume_Time,
+				exe_Status,
+				plan_Num,
+				run_Num,
+				complete_Num,
+				exception,
+				timeout_Status,
+				exe_Type,
+				job_Id,
+				parent_Log_Id
+		FROM 	JC_LOG
+		WHERE 	1=1
+				#if($log_Id)
+					AND log_Id = :log_Id
+				#end
+				#if($exe_Status)
+					AND exe_Status = :exe_Status
+				#end
+				#if($exe_Type)
+					AND exe_Type = :exe_Type
+				#end
+				#if($timeout_Status)
+					AND timeout_Status = :timeout_Status
+				#end
+				#if($job_Id)
+					AND job_Id = :job_Id
+				#end
+				#if($trigger_Time_Start && $trigger_Time_End)
+					AND trigger_Time BETWEEN :trigger_Time_Start AND :trigger_Time_End
+				#end
+				#if($parent_Log_Id)
+					AND parent_Log_Id = :parent_Log_Id
+				#end
+		ORDER BY log_Id DESC
+	]]>
+	</query>
+	
+	<query name="log-query-list">
+	<![CDATA[
+		SELECT 
+				log_Id,
+				trigger_Time,
+				start_Time,
+				end_Time,
+				consume_Time,
+				exe_Status,
+				plan_Num,
+				run_Num,
+				complete_Num,
+				exception,
+				timeout_Status,
+				exe_Type,
+				job_Id,
+				parent_Log_Id
+		FROM 	JC_LOG
+		WHERE 	1=1
+				#if($log_Id)
+					AND log_Id = :log_Id
+				#end
+				#if($exe_Status)
+					AND exe_Status = :exe_Status
+				#end
+				#if($exe_Type)
+					AND exe_Type = :exe_Type
+				#end
+				#if($timeout_Status)
+					AND timeout_Status = :timeout_Status
+				#end
+				#if($job_Id)
+					AND job_Id = :job_Id
+				#end
+				#if($trigger_Time_Start && $trigger_Time_End)
+					AND trigger_Time BETWEEN :trigger_Time_Start AND :trigger_Time_End
+				#end
+				#if($parent_Log_Id)
+					AND parent_Log_Id = :parent_Log_Id
+				#end
+		ORDER BY log_Id DESC
+	]]>
+	</query>
+	
+	<query name="log-query-job-log-page">
+	<![CDATA[
+		SELECT 
+				j.job_Id,
+				j.parent_Job_Id,
+				j.job_Name,
+				j.exe_Status AS exe_Status_Job,
+				l.log_Id,
+				l.trigger_Time,
+				l.start_Time,
+				l.end_Time,
+				l.consume_Time,
+				l.exe_Status AS exe_Status_Log,
+				l.plan_Num,
+				l.run_Num,
+				l.complete_Num,
+				l.exception,
+				l.timeout_Status,
+				l.exe_Type,
+				l.parent_Log_Id
+		FROM 	(
+					SELECT * FROM JC_JOB WHERE 1=1
+					#if($job_Id)
+						AND job_Id = :job_Id
+					#end
+			 		#if($job_Name)
+						AND job_Name LIKE :job_Name
+					#end
+				) j
+				LEFT JOIN JC_LOG l ON j.log_Id = l.log_Id
+		WHERE 	1=1
+				#if($exe_Status_Job)
+					AND j.exe_Status = :exe_Status_Job
+				#end
+				#if($exe_Status_Log)
+					AND l.exe_Status = :exe_Status_Log
+				#end
+		ORDER BY job_Id DESC
+	]]>
+	</query>
+	
+	<query name="log-update-cumulativ-complete">
+	<![CDATA[
+		UPDATE 	JC_LOG 
+		SET 	complete_Num = complete_Num + 1
+		WHERE 	log_Id = :log_Id
+	]]>
+	</query>
+
+	<query name="log-query-list-count">
+	<![CDATA[
+		SELECT 
+				count(*) AS num
+		FROM 	JC_LOG
+		WHERE 	1=1
+				AND job_Id = :job_Id
+				AND (exe_Status = :exe_Status_Success OR exe_Status = :exe_Status_Part_Success)
+				AND trigger_Time BETWEEN :trigger_Time_Start AND :trigger_Time_End
+	]]>
+	</query>
+	
+	<query name="log-delete-by-time">
+	<![CDATA[
+		DELETE	FROM 	JC_LOG 
+		WHERE 	trigger_Time < :start_Time
+	]]>
+	</query>
+
+</dynamic-hibernate>

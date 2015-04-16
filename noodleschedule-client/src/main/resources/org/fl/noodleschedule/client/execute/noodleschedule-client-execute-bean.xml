@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd"
+	default-autowire="byName">
+	
+	<import resource="classpath:org/fl/noodleschedule/client/callback/noodleschedule-client-callback-bean.xml" />
+	
+	<bean id="jobRunnable" class="org.fl.noodleschedule.client.run.JobRunnableTestImpl" >
+		<property name="method" value="jobRunnable"/>
+	</bean>
+	<bean id="quartzJobRunnableTest" class="org.fl.noodleschedule.client.run.JobRunnableTestImpl">
+		<property name="method" value="quartzJobRunnableTest"/>
+	</bean>
+	<bean id="completionJobRunnableTest" class="org.fl.noodleschedule.client.run.JobRunnableTestImpl">
+		<property name="method" value="completionJobRunnableTest"/>
+	</bean>
+	<bean id="childJobRunnableTest" class="org.fl.noodleschedule.client.run.JobRunnableTestImpl">
+		<property name="method" value="childJobRunnableTest"/>
+	</bean>
+	<bean id="childSecondJobRunnableTest" class="org.fl.noodleschedule.client.run.JobRunnableTestImpl">
+		<property name="method" value="childSecondJobRunnableTest"/>
+	</bean>
+	<bean id="childChildJobRunnableTest" class="org.fl.noodleschedule.client.run.JobRunnableTestImpl">
+		<property name="method" value="childChildJobRunnableTest"/>
+	</bean>
+	<bean id="quartzAllJobRunnableTest" class="org.fl.noodleschedule.client.run.JobRunnableTestImpl">
+		<property name="method" value="quartzAllJobRunnableTest"/>
+	</bean>
+	<bean id="completionAllJobRunnableTest" class="org.fl.noodleschedule.client.run.JobRunnableTestImpl">
+		<property name="method" value="completionAllJobRunnableTest"/>
+	</bean>
+	<bean id="childAllJobRunnableTest" class="org.fl.noodleschedule.client.run.JobRunnableTestImpl">
+		<property name="method" value="childAllJobRunnableTest"/>
+	</bean>
+	<bean id="completionChildJobRunnableTest" class="org.fl.noodleschedule.client.run.JobRunnableTestImpl">
+		<property name="method" value="completionChildJobRunnableTest"/>
+	</bean>
+	<bean id="completionChildAllJobRunnableTest" class="org.fl.noodleschedule.client.run.JobRunnableTestImpl">
+		<property name="method" value="completionChildAllJobRunnableTest"/>
+	</bean>
+	
+	<bean id="jobClient" class="org.fl.noodleschedule.client.execute.JobClientImpl">
+		<property name="jobRunnableMap">
+			<map>
+				<entry key="jobRunnable" value-ref="jobRunnable" />
+				<entry key="quartzJobRunnable" value-ref="quartzJobRunnableTest" />
+				<entry key="completionJobRunnable" value-ref="completionJobRunnableTest" />
+				<entry key="childJobRunnable" value-ref="childJobRunnableTest" />
+				<entry key="childSecondJobRunnable" value-ref="childSecondJobRunnableTest" />
+				<entry key="childChildJobRunnable" value-ref="childChildJobRunnableTest" />
+				<entry key="completionChildJobRunnable" value-ref="completionChildJobRunnableTest" />
+				<entry key="quartzAllJobRunnable" value-ref="quartzAllJobRunnableTest" />
+				<entry key="completionAllJobRunnable" value-ref="completionAllJobRunnableTest" />
+				<entry key="childAllJobRunnable" value-ref="childAllJobRunnableTest" />
+				<entry key="completionChildAllJobRunnable" value-ref="completionChildAllJobRunnableTest" />
+			</map>
+		</property>
+	</bean> 
+	
+</beans>

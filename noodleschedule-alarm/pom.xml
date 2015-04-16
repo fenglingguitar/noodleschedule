@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <parent>
+    <groupId>org.fl.noodleschedule</groupId>
+    <artifactId>noodleschedule</artifactId>
+    <version>1.0.0</version>
+  </parent>
+  
+  <groupId>org.fl.noodleschedule.alarm</groupId>
+  <artifactId>noodleschedule-alarm</artifactId>
+  <version>1.0.0</version>
+  <name>noodleschedule-alarm</name>
+  <url>http://maven.apache.org</url>
+  
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  
+  <dependencies>
+  
+  	<dependency>
+		<groupId>org.fl.noodleschedule.console</groupId>
+		<artifactId>noodleschedule-console</artifactId>
+		<version>${noodleschedule.console.version}</version>
+	</dependency>
+  
+  	<dependency>
+		<groupId>org.fl.noodleschedule.util</groupId>
+		<artifactId>noodleschedule-util</artifactId>
+		<version>${noodleschedule.util.version}</version>
+	</dependency>
+  
+  	<dependency>
+		<groupId>org.fl.noodle.common.util</groupId>
+		<artifactId>noodlecommon-util</artifactId>
+	</dependency>
+  
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>
+    
+    <dependency>
+		<groupId>javax.mail</groupId>
+		<artifactId>mail</artifactId>
+	</dependency>
+	
+	<!-- spring framework -->
+    <dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-context</artifactId>
+		<scope>test</scope>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-test</artifactId>
+		<scope>test</scope>
+	</dependency>
+    
+  </dependencies>
+  
+</project>
