@@ -11,7 +11,6 @@ import org.fl.noodleschedule.console.service.CoreService;
 import org.fl.noodleschedule.console.system.jobs.AbstractExecuteSystem;
 import org.fl.noodleschedule.console.vo.JobVo;
 import org.fl.noodleschedule.console.vo.LogVo;
-import org.fl.noodleschedule.core.scheduler.Despatcher;
 import org.fl.noodleschedule.core.trigger.ExecuteTrigger;
 import org.fl.noodleschedule.util.common.Constant;
 
@@ -22,8 +21,6 @@ public class CheckJobRunTimeout extends AbstractExecuteSystem {
 	private CoreService coreService;
 
 	private ExecuteTrigger executeTrigger;
-
-	private Despatcher completionDespatcher;
 
 	public CheckJobRunTimeout() {
 		jobId = Long.MAX_VALUE - 1;
@@ -71,12 +68,6 @@ public class CheckJobRunTimeout extends AbstractExecuteSystem {
 							resultTimeout(jobVo.getLog_Id(), Constant.TIMEOUT_STATUS_YES);
 							
 							jobDisappeareAndRestore(jobVo.getJob_Id(), jobVo.getLog_Id(), Constant.LOG_EXE_STATUS_RUN_DISAPPEAR, Constant.EXCEPTION_RUN_DISAPPEAR);
-							
-							if (logVo.getExe_Type() == Constant.TRIGGER_TYPE_ORDINARY || logVo.getExe_Type() == Constant.TRIGGER_TYPE_TIMEOUT_RETRY) {
-								if (jobVo.getJob_Type().equals(Constant.JOB_TYPE_COMPLETION)) {
-									completionDespatcher.callback(jobVo.getJob_Id());
-								}
-							}
 						}
 					} else {
 						resultTimeout(jobVo.getLog_Id(), Constant.TIMEOUT_STATUS_YES);
@@ -143,9 +134,5 @@ public class CheckJobRunTimeout extends AbstractExecuteSystem {
 
 	public void setSendLogAlarm(SendLogAlarm sendLogAlarm) {
 		this.sendLogAlarm = sendLogAlarm;
-	}
-
-	public void setCompletionDespatcher(Despatcher completionDespatcher) {
-		this.completionDespatcher = completionDespatcher;
 	}
 }

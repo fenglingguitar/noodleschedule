@@ -15,9 +15,4 @@
 	
 	<import resource="classpath:org/fl/noodleschedule/core/noodleschedule-core-bean.xml" />
 	
-	<bean id="jumpToMaster" class="org.fl.noodleschedule.console.web.jump.JumpToMaster">
-		<property name="port" value="8081" />
-		<property name="url" value="/noodleschedule/callback" />
-	</bean>
-	
 </beans>

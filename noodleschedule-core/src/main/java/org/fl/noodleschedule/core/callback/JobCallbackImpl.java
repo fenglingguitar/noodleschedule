@@ -15,7 +15,6 @@ import org.fl.noodleschedule.client.callback.JobCallback;
 import org.fl.noodleschedule.client.pojo.JobResult;
 import org.fl.noodleschedule.console.service.CoreService;
 import org.fl.noodleschedule.console.vo.JobVo;
-import org.fl.noodleschedule.core.scheduler.Despatcher;
 import org.fl.noodleschedule.core.trigger.ExecuteTrigger;
 import org.fl.noodleschedule.util.common.Constant;
 
@@ -24,7 +23,6 @@ public class JobCallbackImpl implements JobCallback {
 	Logger logger = LoggerFactory.getLogger(JobCallbackImpl.class);
 	
 	private CoreService coreService;
-	private Despatcher completionDespatcher;
 	private ExecuteTrigger executeTrigger;
 	
 	private long callbackDelayTime = 200;
@@ -40,7 +38,7 @@ public class JobCallbackImpl implements JobCallback {
 	
 	public void start() throws Exception {
 
-		ExecutorThreadFactory executorThreadFactorySingle = new ExecutorThreadFactory("CompletionDespatcher_Distribute");
+		ExecutorThreadFactory executorThreadFactorySingle = new ExecutorThreadFactory("Callback_Distribute");
 		executorService = Executors.newFixedThreadPool(threadNum, executorThreadFactorySingle);
 		
 		executorService.execute(new Runnable() {
@@ -104,17 +102,6 @@ public class JobCallbackImpl implements JobCallback {
 				delayQueue.add(new childDelayElement(jobVoResult.getJob_Id(), jobResult.getLogId(), childDelayTime));
 			} else if (jobVoResult.getResult() == Constant.CALLBACK_RESULT_PART_SUCCESS || jobVoResult.getResult() == Constant.CALLBACK_RESULT_ALL_FAIL) {
 				delayQueue.add(new retryDelayElement(jobVoResult.getJob_Id(), jobResult.getLogId(), retryDelayTime));
-			}
-			
-			if (jobVoResult.getExeType() == Constant.TRIGGER_TYPE_ORDINARY || jobVoResult.getExeType() == Constant.TRIGGER_TYPE_TIMEOUT_RETRY) {
-				JobVo jobVo = getJob(jobVoResult.getJob_Id());
-				if (jobVo != null) {
-					if (jobVo.getJob_Type().equals(Constant.JOB_TYPE_COMPLETION)) {
-						completionDespatcher.callback(jobVoResult.getJob_Id());
-					}
-				} else {					
-					logger.error("callback -> getJob -> return null -> No execute despatcher callback and child job -> logId: {}, executorId: {}, code: {}", jobResult.getLogId(), jobResult.getExecutorId(), jobResult.getCode());
-				}
 			}
 		}
 		
@@ -217,14 +204,6 @@ public class JobCallbackImpl implements JobCallback {
 	
 	public void setCoreService(CoreService coreService) {
 		this.coreService = coreService;
-	}
-	
-	public Despatcher getCompletionDespatcher() {
-		return completionDespatcher;
-	}
-
-	public void setCompletionDespatcher(Despatcher completionDespatcher) {
-		this.completionDespatcher = completionDespatcher;
 	}
 
 	public void setExecuteTrigger(ExecuteTrigger executeTrigger) {

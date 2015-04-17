@@ -14,14 +14,9 @@
 	<bean id="despatcherMap" class="org.springframework.beans.factory.config.MapFactoryBean">
 		<property name="sourceMap">
 			<map>
-				<entry key="completion" value-ref="completionDespatcher" />
 				<entry key="quartz" value-ref="quartzDespatcher" />
 			</map>
 		</property>
-	</bean>
-	
-	<bean id="completionDespatcher" class="org.fl.noodleschedule.core.scheduler.completion.CompletionDespatcher" 
-		init-method="start" destroy-method="destroy"> 
 	</bean>
 	
 	<bean id="quartzDespatcher" class="org.fl.noodleschedule.core.scheduler.quartz.QuartzDespatcher" 

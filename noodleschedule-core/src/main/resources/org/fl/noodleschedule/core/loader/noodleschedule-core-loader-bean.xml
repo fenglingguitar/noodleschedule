@@ -20,7 +20,6 @@
 		<property name="despatcherMap">
 			<map>
 				<entry key="quartz" value-ref="quartzDespatcher" />
-				<entry key="completion" value-ref="completionDespatcher" />
 			</map>
 		</property>
 	</bean> 

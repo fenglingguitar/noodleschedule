@@ -12,12 +12,10 @@ import org.fl.noodleschedule.console.service.JobService;
 import org.fl.noodle.common.mvc.vo.PageVo;
 import org.fl.noodleschedule.console.vo.JobLogVo;
 import org.fl.noodleschedule.console.vo.JobVo;
-import org.fl.noodleschedule.console.web.jump.JumpToMaster;
 import org.fl.noodleschedule.console.web.mvc.annotation.RequestParam;
 import org.fl.noodleschedule.console.web.mvc.annotation.ResponseBody;
 import org.fl.noodleschedule.console.web.mvc.util.ResultVo;
 import org.fl.noodleschedule.console.web.mvc.util.VoidVo;
-import org.fl.noodleschedule.core.scheduler.Despatcher;
 import org.fl.noodleschedule.core.trigger.ExecuteTrigger;
 import org.fl.noodleschedule.util.common.Constant;
 
@@ -32,13 +30,7 @@ public class JobController {
 	private ExecuteTrigger executeTrigger;
 	
 	@Autowired
-	private Despatcher completionDespatcher;
-	
-	@Autowired
 	private CoreService coreService;
-	
-	@Autowired
-	private JumpToMaster jumpToMaster;
 	
 	@RequestMapping(value = "/querypage")
 	@ResponseBody
@@ -139,20 +131,7 @@ public class JobController {
 	@ResponseBody
 	public ResultVo stopJob(@RequestParam JobLogVo jobLogVo) throws Exception {
 		
-		ResultVo resultVoJump = jumpToMaster.stopJobJump(jobLogVo);
-		if (resultVoJump != null) {
-			return resultVoJump;
-		}
-		
 		if (executeTrigger.stop(jobLogVo.getJob_Id(), jobLogVo.getLog_Id())) {
-			if (jobLogVo.getExe_Type() == Constant.TRIGGER_TYPE_ORDINARY || jobLogVo.getExe_Type() == Constant.TRIGGER_TYPE_TIMEOUT_RETRY) {	
-				JobVo jobVo = coreService.queryJobById(jobLogVo.getJob_Id());
-				if (jobVo != null) {
-					if (jobVo.getJob_Type().equals(Constant.JOB_TYPE_COMPLETION)) {
-						completionDespatcher.callback(jobLogVo.getJob_Id());
-					}
-				}
-			}
 			return new ResultVo("true");
 		}
 		return new ResultVo("false");

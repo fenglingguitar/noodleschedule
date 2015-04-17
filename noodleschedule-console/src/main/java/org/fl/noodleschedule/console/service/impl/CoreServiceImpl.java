@@ -288,12 +288,6 @@ public class CoreServiceImpl implements CoreService {
 		jobVoQuartz.setJob_Type(Constant.JOB_TYPE_QUARTZ);
 		List<JobVo> jobVoQuartzList = jobService.queryJobList(jobVoQuartz);
 		jobVoAllList.addAll(jobVoQuartzList);
-
-		JobVo jobVoCompletion = new JobVo();
-		jobVoCompletion.setStatus(Constant.STATUS_YES);
-		jobVoCompletion.setJob_Type(Constant.JOB_TYPE_COMPLETION);
-		List<JobVo> jobVoCompletionList = jobService.queryJobList(jobVoCompletion);
-		jobVoAllList.addAll(jobVoCompletionList);		
 		
 		return jobVoAllList;
 	}

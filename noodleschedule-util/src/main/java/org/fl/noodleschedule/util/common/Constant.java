@@ -3,7 +3,6 @@ package org.fl.noodleschedule.util.common;
 public final class Constant {
 	
 	public static final String JOB_TYPE_QUARTZ = "quartz";
-	public static final String JOB_TYPE_COMPLETION = "completion";
 	public static final String JOB_TYPE_CHILD = "child";
 	
 	public static final int STATUS_YES = 1;
