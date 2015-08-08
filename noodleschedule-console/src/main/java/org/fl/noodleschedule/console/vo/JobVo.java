@@ -10,13 +10,13 @@ public class JobVo implements java.io.Serializable {
 	private String job_Name;
 	private String job_Type;
 	private String cron;
-	private Long delay_Time;
 	private String route_Type;
 	private Long exe_Timeout;
 	private Integer status;
 	private String description;
 	private Date lastModified_Time;
 	private String method;
+	private String param;
 	private Integer exe_Status;
 	private Integer exe_Status_New;
 	private Integer exe_Status_Old;
@@ -71,13 +71,6 @@ public class JobVo implements java.io.Serializable {
 		this.cron = cron;
 	}
 	
-	public Long getDelay_Time() {
-		return delay_Time;
-	}
-	public void setDelay_Time(Long delay_Time) {
-		this.delay_Time = delay_Time;
-	}
-	
 	public String getRoute_Type() {
 		return route_Type;
 	}
@@ -120,6 +113,13 @@ public class JobVo implements java.io.Serializable {
 		this.method = method;
 	}
 	
+	public String getParam() {
+		return param;
+	}
+	public void setParam(String param) {
+		this.param = param;
+	}
+
 	public Integer getExe_Status() {
 		return exe_Status;
 	}
@@ -231,11 +231,11 @@ public class JobVo implements java.io.Serializable {
 				.append("jobName: ").append(job_Name).append(", ")
 				.append("jobType: ").append(job_Type).append(", ")
 				.append("cron: ").append(cron).append(", ")
-				.append("delayTime: ").append(delay_Time).append(", ")
 				.append("routeType: ").append(route_Type).append(", ")
 				.append("exeTimeout: ").append(exe_Timeout).append(", ")
 				.append("lastModifiedTime: ").append(lastModified_Time).append(", ")
 				.append("method: ").append(method).append(", ")
+				.append("param: ").append(param).append(", ")
 				.append("exeRetry: ").append(exe_Retry).append(", ")
 				.append("timeoutRetry: ").append(timeout_Retry).append(", ")
 				.append("parentJobId: ").append(parent_Job_Id).toString();

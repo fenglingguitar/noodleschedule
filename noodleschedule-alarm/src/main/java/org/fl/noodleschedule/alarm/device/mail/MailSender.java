@@ -18,10 +18,10 @@ public class MailSender {
 	
 	private final static Logger logger = LoggerFactory.getLogger(MailSender.class);
 	
-	private String sender = "Autohome JobCenter";
-	private String senderEmail = "autohome_jobcenter@163.com";
-	private String user = "autohome_jobcenter";
-	private String password = "autohome2014";
+	private String sender = "Noodle Schedule";
+	private String senderEmail = "noodle_schedule@163.com";
+	private String user = "noodle_schedule";
+	private String password = "schedule@noodle";
 	private String smtpHost = "smtp.163.com";
 	
 	public boolean sendMail(String toMail, String title, String content) {

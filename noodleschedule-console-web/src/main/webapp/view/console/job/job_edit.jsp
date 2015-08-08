@@ -235,17 +235,12 @@
 			    		<select id="job_Type">
 			    			<option value="">--select--</option>
 			    			<option value="quartz">普通调度</option>
-			    			<option value="completion">完成后调度</option>
 			    		</select>
 			    	</td>
 				</tr>
 				<tr>
 			    	<th><label id="cron_Label">cron表达式</label></th>
 			    	<td><input type="text" id="cron" maxlength="128"/><button id="cron_Edit" style="margin-left:5px;top:5px;width:28px;height:19px;">编辑</button></td>
-					<th><label id="delay_Time_Label">执行间隔(秒)</label></th>
-			    	<td><input type="text" id="delay_Time" maxlength="8" onkeyup="this.value=this.value.replace(/\D/g,'')"/></td>
-				</tr>
-				<tr>
 					<th><label id="route_Type_Label">路由规则</label></th>
 			    	<td>
 			    		<select id="route_Type">
@@ -256,8 +251,12 @@
 			    			<option value="all">全部执行</option>
 			    		</select>
 			    	</td>
+				</tr>
+				<tr>
 			    	<th><label id="method_Label">执行方法</label></th>
 			    	<td><input type="text" id="method" maxlength="64"/></td>
+			    	<th><label id="param_Label">执行参数</label></th>
+			    	<td><input type="text" id="param" maxlength="512"/></td>
 				</tr>
 				<tr>
 					<th><label id="exe_Timeout_Label">超时时间(秒)</label></th>

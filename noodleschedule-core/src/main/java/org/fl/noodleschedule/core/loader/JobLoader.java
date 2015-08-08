@@ -85,7 +85,7 @@ public class JobLoader implements LockChangeHandler {
 
 					while (!stopSign) {											
 						
-						List<JobVo> jobVoList = getJobList();
+						List<JobVo> jobVoList = getDispatchJobList();
 						
 						if (jobVoList != null) {
 							removeDeleteJobs(jobVoList);
@@ -138,9 +138,9 @@ public class JobLoader implements LockChangeHandler {
 		}
 	}
 	
-	private List<JobVo> getJobList() {
+	private List<JobVo> getDispatchJobList() {
 		try {
-			return coreService.queryQuartzAndCompletionJob();
+			return coreService.queryDispatchJob();
 		} catch (Exception e) {
 			logger.error("getJobList -> coreService.queryQuartzAndCompletionJob -> Exception: {} ", e);
 		}

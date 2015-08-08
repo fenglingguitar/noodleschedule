@@ -11,16 +11,10 @@
 			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd"
 	default-autowire="byName">
 	
-	<import resource="classpath:org/fl/noodleschedule/console/noodleschedule-console-bean.xml" />
-	<import resource="classpath:org/fl/noodleschedule/core/scheduler/quartz/noodleschedule-core-quartz-despatcher-bean.xml" />
-	<import resource="classpath:org/fl/noodleschedule/core/system/jobs/noodleschedule-core-system-jobs-bean.xml" />
-
-	<bean id="jobLoader" class="org.fl.noodleschedule.core.loader.JobLoader">
-		<property name="despatcherMap">
-			<map>
-				<entry key="quartz" value-ref="quartzDespatcher" />
-			</map>
-		</property>
-	</bean> 
+	<import resource="classpath:org/fl/noodleschedule/client/server/noodleschedule-client-server-bean.xml" />
+	
+	<bean id="jobEmbedServer" class="org.fl.noodleschedule.client.server.JobEmbedServer" init-method="start" destroy-method="destroy">
+		<property name="port" value="9001"/>
+	</bean>
 	
 </beans>

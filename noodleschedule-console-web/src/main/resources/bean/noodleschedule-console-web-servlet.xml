@@ -24,45 +24,26 @@
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
 	</bean>
 	
-	<mvc:view-controller path="/" view-name="index"/>
-	
-	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"> 
-		<property name="messageConverters">  
-			<list>  
-				<bean class="org.springframework.http.converter.StringHttpMessageConverter">  
-					<property name="supportedMediaTypes">  
-						<list>  
-							<value>text/html;charset=UTF-8</value>
-						</list>  
-					</property> 
-				</bean>
-			</list>  
-		</property>
-		<property name="customArgumentResolvers">
-			<list>
-				<bean class="org.fl.noodleschedule.console.web.mvc.MethodArgumentResolver"></bean>
-			</list>
-		</property>
-		<property name="customReturnValueHandlers">
-			<list>
-				<bean class="org.fl.noodleschedule.console.web.mvc.MethodReturnValueHandler">
-					<constructor-arg>
-						<list>  
-							<bean class="org.springframework.http.converter.StringHttpMessageConverter">  
-								<property name="supportedMediaTypes">  
-									<list>  
-										<value>text/html;charset=UTF-8</value>
-									</list>  
-								</property> 
-							</bean>
-						</list>  
-					</constructor-arg>
-				</bean>
-			</list>
-		</property>
-	</bean> 
-	
-	<mvc:annotation-driven/>  
+	<mvc:annotation-driven>
+	    <mvc:argument-resolvers>
+	        <bean class="org.fl.noodle.common.mvc.MethodArgumentResolver"></bean>
+	    </mvc:argument-resolvers>
+        <mvc:return-value-handlers>
+	        <bean class="org.fl.noodle.common.mvc.MethodReturnValueHandler">
+				<constructor-arg>
+					<list>  
+						<bean class="org.springframework.http.converter.StringHttpMessageConverter">  
+							<property name="supportedMediaTypes">  
+								<list>  
+									<value>text/html;charset=UTF-8</value>
+								</list>  
+							</property> 
+						</bean>
+					</list>  
+				</constructor-arg>
+			</bean>
+	    </mvc:return-value-handlers>
+	</mvc:annotation-driven>  
 	<mvc:default-servlet-handler/>
 	
 	<mvc:resources location="/common/images/" mapping="/images/**"/>
@@ -70,7 +51,7 @@
 	<mvc:resources location="/common/js/" mapping="/js/**"/>
 	<mvc:resources location="/common/tool/" mapping="/tool/**"/>
     
-    <bean id="exceptionResolver" class="org.fl.noodleschedule.console.web.mvc.ExceptionResolver" >
+    <bean id="exceptionResolver" class="org.fl.noodle.common.mvc.ExceptionResolver" >
     	<constructor-arg>
 			<list>  
 				<bean class="org.springframework.http.converter.StringHttpMessageConverter">  

@@ -17,6 +17,6 @@ public class MailSenderTest extends AbstractJUnit4SpringContextTests {
 	
 	@Test
 	public void testSendMail() {
-		assertTrue(mailSender.sendMail("zhuchuanzhi@autohome.com.cn", "JobCenter测试", "JobCenter测试"));
+		assertTrue(mailSender.sendMail("fenglingguitar@163.com", "NoodleSchedule测试", "NoodleSchedule测试"));
 	}
 }

@@ -279,7 +279,7 @@ public class CoreServiceImpl implements CoreService {
 	}
 	
 	@Override
-	public List<JobVo> queryQuartzAndCompletionJob() throws Exception {
+	public List<JobVo> queryDispatchJob() throws Exception {
 		
 		List<JobVo> jobVoAllList = new LinkedList<JobVo>();
 		

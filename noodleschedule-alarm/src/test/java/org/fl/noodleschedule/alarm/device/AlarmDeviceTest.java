@@ -17,7 +17,7 @@ public class AlarmDeviceTest extends AbstractJUnit4SpringContextTests {
 	
 	@Test
 	public void testAddAlarm() {
-		alarmDevice.addAlarm(new AlarmInfo(1L, "JobCenter测试", "JobCenter测试", "JobCenter测试"));
+		alarmDevice.addAlarm(new AlarmInfo(1L, "NoodleSchedule测试", "NoodleSchedule测试", "NoodleSchedule测试"));
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {

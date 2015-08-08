@@ -6,16 +6,15 @@ import org.quartz.CronExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.fl.noodleschedule.console.service.CoreService;
 import org.fl.noodleschedule.console.service.JobService;
+import org.fl.noodle.common.mvc.annotation.NoodleRequestParam;
+import org.fl.noodle.common.mvc.annotation.NoodleResponseBody;
 import org.fl.noodle.common.mvc.vo.PageVo;
+import org.fl.noodle.common.mvc.vo.ResultVo;
+import org.fl.noodle.common.mvc.vo.VoidVo;
 import org.fl.noodleschedule.console.vo.JobLogVo;
 import org.fl.noodleschedule.console.vo.JobVo;
-import org.fl.noodleschedule.console.web.mvc.annotation.RequestParam;
-import org.fl.noodleschedule.console.web.mvc.annotation.ResponseBody;
-import org.fl.noodleschedule.console.web.mvc.util.ResultVo;
-import org.fl.noodleschedule.console.web.mvc.util.VoidVo;
 import org.fl.noodleschedule.core.trigger.ExecuteTrigger;
 import org.fl.noodleschedule.util.common.Constant;
 
@@ -33,70 +32,70 @@ public class JobController {
 	private CoreService coreService;
 	
 	@RequestMapping(value = "/querypage")
-	@ResponseBody
-	public PageVo<JobVo> queryPage(@RequestParam JobVo vo, String page, String rows) throws Exception {
+	@NoodleResponseBody
+	public PageVo<JobVo> queryPage(@NoodleRequestParam JobVo vo, String page, String rows) throws Exception {
 		page = page != null && !page.equals("") ? page : "0";
 		rows = rows != null && !rows.equals("") ? rows : "0";
 		return jobService.queryJobPage(vo, Integer.parseInt(page), Integer.parseInt(rows));
 	}
 	
 	@RequestMapping(value = "/querylist")
-	@ResponseBody
-	public List<JobVo> queryList(@RequestParam JobVo vo) throws Exception {
+	@NoodleResponseBody
+	public List<JobVo> queryList(@NoodleRequestParam JobVo vo) throws Exception {
 		return jobService.queryJobList(vo);
 	}
 	
 	@RequestMapping(value = "/insert")
-	@ResponseBody
-	public VoidVo insert(@RequestParam JobVo vo) throws Exception {
+	@NoodleResponseBody
+	public VoidVo insert(@NoodleRequestParam JobVo vo) throws Exception {
 		jobService.insertJob(vo);
 		return VoidVo.VOID;
 	}
 	
 	@RequestMapping(value = "/inserts")
-	@ResponseBody
-	public VoidVo inserts(@RequestParam JobVo[] vos) throws Exception {
+	@NoodleResponseBody
+	public VoidVo inserts(@NoodleRequestParam JobVo[] vos) throws Exception {
 		jobService.insertsJob(vos);
 		return VoidVo.VOID;
 	}
 	
 	@RequestMapping(value = "/update")
-	@ResponseBody
-	public VoidVo update(@RequestParam JobVo vo) throws Exception {
+	@NoodleResponseBody
+	public VoidVo update(@NoodleRequestParam JobVo vo) throws Exception {
 		jobService.updateJob(vo);
 		return VoidVo.VOID;
 	}
 	
 	@RequestMapping(value = "/updateincludenull")
-	@ResponseBody
-	public VoidVo updateIncludeNull(@RequestParam JobVo vo) throws Exception {
+	@NoodleResponseBody
+	public VoidVo updateIncludeNull(@NoodleRequestParam JobVo vo) throws Exception {
 		jobService.updateJobIncludeNull(vo);
 		return VoidVo.VOID;
 	}
 	
 	@RequestMapping(value = "/updates")
-	@ResponseBody
-	public VoidVo updates(@RequestParam JobVo[] vos) throws Exception {
+	@NoodleResponseBody
+	public VoidVo updates(@NoodleRequestParam JobVo[] vos) throws Exception {
 		jobService.updatesJob(vos);
 		return VoidVo.VOID;
 	}
 	
 	@RequestMapping(value = "/delete")
-	@ResponseBody
-	public VoidVo delete(@RequestParam JobVo vo) throws Exception {
+	@NoodleResponseBody
+	public VoidVo delete(@NoodleRequestParam JobVo vo) throws Exception {
 		jobService.deleteJob(vo);
 		return VoidVo.VOID;
 	}
 	
 	@RequestMapping(value = "/deletes")
-	@ResponseBody
-	public VoidVo deletes(@RequestParam JobVo[] vos) throws Exception {
+	@NoodleResponseBody
+	public VoidVo deletes(@NoodleRequestParam JobVo[] vos) throws Exception {
 		jobService.deletesJob(vos);
 		return VoidVo.VOID;
 	}
 	
 	@RequestMapping(value = "/checkcron")
-	@ResponseBody
+	@NoodleResponseBody
 	public ResultVo checkCron(String cron) throws Exception {
 		try {
 			CronExpression.validateExpression(cron);
@@ -107,7 +106,7 @@ public class JobController {
 	}
 	
 	@RequestMapping(value = "/checkparentjob")
-	@ResponseBody
+	@NoodleResponseBody
 	public ResultVo checkParentJob(Long jobId) throws Exception {
 		JobVo jobVo = new JobVo();
 		jobVo.setJob_Id(jobId);
@@ -119,8 +118,8 @@ public class JobController {
 	}
 	
 	@RequestMapping(value = "/trigger")
-	@ResponseBody
-	public ResultVo triggerJob(@RequestParam JobVo jobVo) throws Exception {
+	@NoodleResponseBody
+	public ResultVo triggerJob(@NoodleRequestParam JobVo jobVo) throws Exception {
 		if (executeTrigger.execute(jobVo, Constant.TRIGGER_TYPE_MANUAL)) {
 			return new ResultVo("true");
 		}
@@ -128,8 +127,8 @@ public class JobController {
 	}
 	
 	@RequestMapping(value = "/stop")
-	@ResponseBody
-	public ResultVo stopJob(@RequestParam JobLogVo jobLogVo) throws Exception {
+	@NoodleResponseBody
+	public ResultVo stopJob(@NoodleRequestParam JobLogVo jobLogVo) throws Exception {
 		
 		if (executeTrigger.stop(jobLogVo.getJob_Id(), jobLogVo.getLog_Id())) {
 			return new ResultVo("true");

@@ -23,13 +23,13 @@ public class JobMd implements java.io.Serializable {
 	private String job_Name;
 	private String job_Type;
 	private String cron;
-	private Long delay_Time;
 	private String route_Type;
 	private Long exe_Timeout;
 	private Integer status;
 	private String description;
 	private Date lastModified_Time;
 	private String method;
+	private String param;
 	private Integer exe_Status;
 	private Integer exe_Retry;
 	private Integer timeout_Retry;
@@ -78,14 +78,6 @@ public class JobMd implements java.io.Serializable {
 		this.cron = cron;
 	}
 	
-	@Column(name = "DELAY_TIME", nullable = true)
-	public Long getDelay_Time() {
-		return delay_Time;
-	}
-	public void setDelay_Time(Long delay_Time) {
-		this.delay_Time = delay_Time;
-	}
-	
 	@Column(name = "ROUTE_TYPE", nullable = false, length = 32)
 	public String getRoute_Type() {
 		return route_Type;
@@ -132,6 +124,14 @@ public class JobMd implements java.io.Serializable {
 	}
 	public void setMethod(String method) {
 		this.method = method;
+	}
+	
+	@Column(name = "PARAM", nullable = true, length = 512)
+	public String getParam() {
+		return param;
+	}
+	public void setParam(String param) {
+		this.param = param;
 	}
 	
 	@Column(name = "EXE_STATUS", nullable = false)

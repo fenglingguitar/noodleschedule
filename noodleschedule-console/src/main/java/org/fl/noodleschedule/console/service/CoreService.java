@@ -23,7 +23,7 @@ public interface CoreService {
 	public void updateExecutorExeStatus(long logId, long executorId, int exeStatus, String exception) throws Exception;
 	public JobVo saveCallbackResult(long logId, long executorId, int exeStatus, String exception) throws Exception;
 	public List<JobVo> queryChildJobList(long jobId) throws Exception;
-	public List<JobVo> queryQuartzAndCompletionJob() throws Exception;
+	public List<JobVo> queryDispatchJob() throws Exception;
 	public List<JobVo> queryRunJob() throws Exception;
 	public void updateTimeoutStatus(long logId, int timeoutStatus) throws Exception;
 	public List<JobAlarmPeopleVo> queryAlarmPeopleByJob(long jobId) throws Exception;

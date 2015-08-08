@@ -11,7 +11,7 @@
     
     <script src="<%=request.getContextPath()%>/common/tool/wijmo-open/development-bundle/external/jquery-1.8.2.min.js" type="text/javascript"></script>
     <script src="<%=request.getContextPath()%>/common/tool/wijmo-open/development-bundle/external/jquery-ui-1.9.1.custom.min.js" type="text/javascript"></script>
-	<script src="<%=request.getContextPath()%>/common/tool/jqgrid/js/i18n/grid.locale-en.js" type="text/javascript"></script>
+	<script src="<%=request.getContextPath()%>/common/tool/jqgrid/js/i18n/grid.locale-cn.js" type="text/javascript"></script>
 	<script src="<%=request.getContextPath()%>/common/tool/jqgrid/js/jquery.jqGrid.min.js" type="text/javascript"></script>
     <script src="<%=request.getContextPath()%>/common/js/common.js" type="text/javascript"></script>
 	
@@ -62,9 +62,9 @@
 					'任务名称', 
 					'调度类型',
 					'cron表达式',
-					'执行间隔(秒)',
 					'路由规则',
 					'执行方法',
+					'执行参数',
 					'超时时间(秒)',
 					'执行失败重试',
 					'超时重试',
@@ -76,11 +76,11 @@
 			   	colModel: [
 					{name:'job_Id', index:'job_Id', width:80, align: 'center'},
 					{name:'job_Name', index:'job_Name', width:280, align: 'center'},
-					{name:'job_Type', index:'job_Type', width:100, align: 'center', formatter:'select', editoptions:{value:'quartz:普通调度;completion:完成后调度;child:子任务调度'}},
+					{name:'job_Type', index:'job_Type', width:100, align: 'center', formatter:'select', editoptions:{value:'quartz:普通调度;child:子任务调度'}},
 					{name:'cron', index:'cron', width:160, align: 'center'},
-					{name:'delay_Time', index:'delay_Time', width:120, align: 'center'},
 					{name:'route_Type', index:'route_Type', width:100, align: 'center', formatter:'select', editoptions:{value:'first:第一台开始;random:随机;sequence:循环顺序;all:全部执行'}},
 					{name:'method', index:'method', width:220, align: 'center'},
+					{name:'param', index:'param', width:220, align: 'center'},
 					{name:'exe_Timeout', index:'exe_Timeout', width:120, align: 'center'},
 					{name:'exe_Retry', index:'exe_Retry', width:100, align: 'center', formatter:'select', editoptions:{value:'1:是;2:否'}},
 					{name:'timeout_Retry', index:'timeout_Retry', width:100, align: 'center', formatter:'select', editoptions:{value:'1:是;2:否'}},
@@ -282,7 +282,6 @@
 			    		<select id="job_Type">
 			    			<option value="">--all--</option>
 			    			<option value="quartz">普通调度</option>
-			    			<option value="completion">完成后调度</option>
 			    			<option value="child">子任务调度</option>
 			    		</select>
 			    	</td>
