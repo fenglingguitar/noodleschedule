@@ -175,8 +175,6 @@
   <build>
   
     <finalName>noodleschedule-console-web</finalName>
-    
-	<outputDirectory>${basedir}/src/main/webapp/WEB-INF/classes</outputDirectory>
 	
 	<plugins>
 				
