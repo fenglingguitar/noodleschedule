@@ -17,8 +17,7 @@
 		init-method="start" destroy-method="destroy" />
 	
 	<bean id="checkIntervalAlarm" class="org.fl.noodleschedule.alarm.jobs.CheckIntervalAlarm">
-		<property name="jobType" value="completion" />
-		<property name="delayTime" value="30" />
+		<property name="cron" value="0/30 * * * * ?" />
 	</bean>
 	
 	<bean id="sendLogAlarm" class="org.fl.noodleschedule.alarm.sender.SendLogAlarm" />

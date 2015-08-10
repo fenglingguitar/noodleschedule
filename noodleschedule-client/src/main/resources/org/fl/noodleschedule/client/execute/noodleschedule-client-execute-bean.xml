@@ -13,54 +13,34 @@
 	
 	<import resource="classpath:org/fl/noodleschedule/client/callback/noodleschedule-client-callback-bean.xml" />
 	
-	<bean id="jobRunnable" class="org.fl.noodleschedule.client.run.JobRunnableTestImpl" >
+	<bean id="jobRunnableTest" class="org.fl.noodleschedule.client.demo.run.JobRunnableTestImpl">
 		<property name="method" value="jobRunnable"/>
 	</bean>
-	<bean id="quartzJobRunnableTest" class="org.fl.noodleschedule.client.run.JobRunnableTestImpl">
-		<property name="method" value="quartzJobRunnableTest"/>
+	<bean id="childJobRunnableTest" class="org.fl.noodleschedule.client.demo.run.JobRunnableTestImpl">
+		<property name="method" value="childJobRunnable"/>
 	</bean>
-	<bean id="completionJobRunnableTest" class="org.fl.noodleschedule.client.run.JobRunnableTestImpl">
-		<property name="method" value="completionJobRunnableTest"/>
+	<bean id="childSecondJobRunnableTest" class="org.fl.noodleschedule.client.demo.run.JobRunnableTestImpl">
+		<property name="method" value="childSecondJobRunnable"/>
 	</bean>
-	<bean id="childJobRunnableTest" class="org.fl.noodleschedule.client.run.JobRunnableTestImpl">
-		<property name="method" value="childJobRunnableTest"/>
+	<bean id="childChildJobRunnableTest" class="org.fl.noodleschedule.client.demo.run.JobRunnableTestImpl">
+		<property name="method" value="childChildJobRunnable"/>
 	</bean>
-	<bean id="childSecondJobRunnableTest" class="org.fl.noodleschedule.client.run.JobRunnableTestImpl">
-		<property name="method" value="childSecondJobRunnableTest"/>
+	<bean id="allJobRunnableTest" class="org.fl.noodleschedule.client.demo.run.JobRunnableTestImpl">
+		<property name="method" value="allJobRunnableTest"/>
 	</bean>
-	<bean id="childChildJobRunnableTest" class="org.fl.noodleschedule.client.run.JobRunnableTestImpl">
-		<property name="method" value="childChildJobRunnableTest"/>
-	</bean>
-	<bean id="quartzAllJobRunnableTest" class="org.fl.noodleschedule.client.run.JobRunnableTestImpl">
-		<property name="method" value="quartzAllJobRunnableTest"/>
-	</bean>
-	<bean id="completionAllJobRunnableTest" class="org.fl.noodleschedule.client.run.JobRunnableTestImpl">
-		<property name="method" value="completionAllJobRunnableTest"/>
-	</bean>
-	<bean id="childAllJobRunnableTest" class="org.fl.noodleschedule.client.run.JobRunnableTestImpl">
-		<property name="method" value="childAllJobRunnableTest"/>
-	</bean>
-	<bean id="completionChildJobRunnableTest" class="org.fl.noodleschedule.client.run.JobRunnableTestImpl">
-		<property name="method" value="completionChildJobRunnableTest"/>
-	</bean>
-	<bean id="completionChildAllJobRunnableTest" class="org.fl.noodleschedule.client.run.JobRunnableTestImpl">
-		<property name="method" value="completionChildAllJobRunnableTest"/>
+	<bean id="childAllJobRunnableTest" class="org.fl.noodleschedule.client.demo.run.JobRunnableTestImpl">
+		<property name="method" value="childAllJobRunnable"/>
 	</bean>
 	
 	<bean id="jobClient" class="org.fl.noodleschedule.client.execute.JobClientImpl">
 		<property name="jobRunnableMap">
 			<map>
-				<entry key="jobRunnable" value-ref="jobRunnable" />
-				<entry key="quartzJobRunnable" value-ref="quartzJobRunnableTest" />
-				<entry key="completionJobRunnable" value-ref="completionJobRunnableTest" />
+				<entry key="jobRunnable" value-ref="jobRunnableTest" />
 				<entry key="childJobRunnable" value-ref="childJobRunnableTest" />
 				<entry key="childSecondJobRunnable" value-ref="childSecondJobRunnableTest" />
 				<entry key="childChildJobRunnable" value-ref="childChildJobRunnableTest" />
-				<entry key="completionChildJobRunnable" value-ref="completionChildJobRunnableTest" />
-				<entry key="quartzAllJobRunnable" value-ref="quartzAllJobRunnableTest" />
-				<entry key="completionAllJobRunnable" value-ref="completionAllJobRunnableTest" />
+				<entry key="allJobRunnable" value-ref="allJobRunnableTest" />
 				<entry key="childAllJobRunnable" value-ref="childAllJobRunnableTest" />
-				<entry key="completionChildAllJobRunnable" value-ref="completionChildAllJobRunnableTest" />
 			</map>
 		</property>
 	</bean> 

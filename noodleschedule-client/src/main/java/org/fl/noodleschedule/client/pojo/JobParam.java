@@ -7,6 +7,7 @@ public class JobParam implements java.io.Serializable {
 	private long logId;
 	private long executorId;
 	private String method;
+	private String param;
 	private String actionType;
 	
 	public JobParam() {
@@ -20,6 +21,13 @@ public class JobParam implements java.io.Serializable {
 		this.logId = logId;
 		this.executorId = executorId;
 		this.method = method;
+	}
+	
+	public JobParam(long logId, long executorId, String method, String param) {
+		this.logId = logId;
+		this.executorId = executorId;
+		this.method = method;
+		this.param = param;
 	}
 	
 	public Long getLogId() {
@@ -43,6 +51,13 @@ public class JobParam implements java.io.Serializable {
 		this.method = method;
 	}
 	
+	public String getParam() {
+		return param;
+	}
+	public void setParam(String param) {
+		this.param = param;
+	}
+
 	public String getActionType() {
 		return actionType;
 	}

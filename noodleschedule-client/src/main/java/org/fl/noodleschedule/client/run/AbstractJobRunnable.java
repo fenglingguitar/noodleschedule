@@ -8,6 +8,9 @@ public abstract class AbstractJobRunnable implements JobRunnable {
 	protected long logId;
 	protected long executorId;
 	
+	protected String method;
+	protected String param;
+	
 	protected JobCallback jobCallback;
 
 	public long getLogId() {
@@ -22,6 +25,20 @@ public abstract class AbstractJobRunnable implements JobRunnable {
 	}
 	public void setExecutorId(long executorId) {
 		this.executorId = executorId;
+	}
+	
+	public String getMethod() {
+		return method;
+	}
+	public void setMethod(String method) {
+		this.method = method;
+	}
+	
+	public String getParam() {
+		return param;
+	}
+	public void setParam(String param) {
+		this.param = param;
 	}
 	
 	protected JobResult callback(int code, String exception) {

@@ -1,9 +1,9 @@
-package org.fl.noodleschedule.client.run;
+package org.fl.noodleschedule.client.demo.run;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.fl.noodleschedule.client.pojo.JobResult;
+import org.fl.noodleschedule.client.run.AbstractJobRunnable;
 import org.fl.noodleschedule.util.common.Constant;
 
 public class JobRunnableTestImpl extends AbstractJobRunnable {
@@ -12,13 +12,11 @@ public class JobRunnableTestImpl extends AbstractJobRunnable {
 	
 	private static int diff = (int) Math.round(Math.random() * 100000000);
 	
-	private String method;
-	
 	@Override
 	public void run() {
 		
 		int sleepTime = (int) Math.round(Math.random() * 30);
-		logger.info("{}: Start -> method: {}, logId: {}, executorId: {}, sleepTime: {}", diff, method, logId, executorId, sleepTime);
+		logger.info("{}: Start -> method: {}, param: {}, logId: {}, executorId: {}, sleepTime: {}", diff, method, param, logId, executorId, sleepTime);
 		try {
 			Thread.sleep(sleepTime * 1000);
 		} catch (InterruptedException e) {
@@ -42,7 +40,5 @@ public class JobRunnableTestImpl extends AbstractJobRunnable {
 		}
 	}
 
-	public void setMethod(String method) {
-		this.method = method;
-	}
+	
 }

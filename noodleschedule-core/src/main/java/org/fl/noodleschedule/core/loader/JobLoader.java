@@ -130,10 +130,10 @@ public class JobLoader implements LockChangeHandler {
 			Despatcher despatcher = despatcherMap.get(executeSystem.getJobType());
 			if (despatcher != null) {
 				if (despatcher.addSystemJob(executeSystem)) {
-					logger.info("Success add a new system job -> jobId: {}, jobName: {}, jobType: {}, cron: {}, delayTime: {}", executeSystem.getJobId(), executeSystem.getJobName(), executeSystem.getJobType(), executeSystem.getCron(), executeSystem.getDelayTime());
+					logger.info("Success add a new system job -> jobId: {}, jobName: {}, jobType: {}, cron: {}", executeSystem.getJobId(), executeSystem.getJobName(), executeSystem.getJobType(), executeSystem.getCron());
 				}
 			} else {
-				logger.error("addSystemJobs -> despatcherMap.get -> no have this despatcher -> jobId: {}, jobType: {}", executeSystem.getJobId(), executeSystem.getJobType());
+				logger.error("addSystemJobs -> despatcherMap.get -> no have this despatcher -> jobId: {}, jobName: {}, jobType: {}, cron: {}", executeSystem.getJobId(), executeSystem.getJobName(), executeSystem.getJobType(), executeSystem.getCron());
 			}
 		}
 	}

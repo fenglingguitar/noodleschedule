@@ -5,6 +5,5 @@ public interface ExecuteSystem {
 	public String getJobName();
 	public String getJobType();
 	public String getCron();
-	public long getDelayTime();
 	public boolean execute();
 }

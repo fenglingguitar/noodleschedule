@@ -53,7 +53,7 @@
 				top.closeDialog(false);
 			});
 			$('#cron_Edit').button({icons: {primary: "ui-icon-pencil"}, text: false}).click(function() {
-				top.openDialogChild("编辑corn表达式", "<%=request.getContextPath()%>/view/console/job/job_corn_edit.jsp", null, 270, 500, editCornCallback);
+				top.openDialogChild("编辑corn表达式", "<%=request.getContextPath()%>/view/console/job/job_corn_edit.jsp", null, 285, 500, editCornCallback);
 			});
 			
 			var urlParamObject = getURLParamObject();
@@ -232,8 +232,7 @@
 			    	<td><input type="text" id="job_Name" maxlength="32"/></td>
 					<th><label id="job_Type_Label">调度类型</label></th>
 			    	<td>
-			    		<select id="job_Type">
-			    			<option value="">--select--</option>
+			    		<select id="job_Type" disabled="disabled">
 			    			<option value="quartz">普通调度</option>
 			    		</select>
 			    	</td>

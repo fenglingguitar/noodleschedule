@@ -27,6 +27,7 @@ public class JobClientImpl implements JobClient {
 		if (jobRunnable != null) {
 			jobRunnable.setLogId(jobParam.getLogId());
 			jobRunnable.setExecutorId(jobParam.getExecutorId());
+			jobRunnable.setParam(jobParam.getParam());
 			thread = new Thread(jobRunnable, "noodleschedule-jobclient-" + jobParam.getMethod());
 			threadMap.put(jobParam.getMethod(), thread);
 			thread.start();

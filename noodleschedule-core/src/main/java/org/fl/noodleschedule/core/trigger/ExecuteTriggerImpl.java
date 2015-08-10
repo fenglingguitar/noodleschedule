@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.fl.noodleschedule.alarm.sender.SendLogAlarm;
 import org.fl.noodleschedule.client.execute.JobClient;
 import org.fl.noodleschedule.client.pojo.JobParam;
@@ -95,7 +94,7 @@ public class ExecuteTriggerImpl implements ExecuteTrigger {
 			return false;
 		}
 		
-		return triggerExecutor(jobVoNow.getRoute_Type(), jobVoNow.getJob_Id(), logId, jobVoNow.getMethod(), jobExecutorVoList, jobVo);
+		return triggerExecutor(jobVoNow.getRoute_Type(), jobVoNow.getJob_Id(), logId, jobVoNow.getMethod(), jobVoNow.getParam(), jobExecutorVoList, jobVo);
 	}
 	
 	@Override
@@ -245,15 +244,15 @@ public class ExecuteTriggerImpl implements ExecuteTrigger {
 		return skipTriggerNoReleaseJob(logId, Constant.LOG_EXE_STATUS_TRIGGER_SKIP, Constant.EXCEPTION_NO_CATCH);
 	}
 
-	private boolean triggerExecutor(String routeType, long jobId, long logId, String method, List<JobExecutorVo> jobExecutorVoList, JobVo jobVo) {
+	private boolean triggerExecutor(String routeType, long jobId, long logId, String method, String param, List<JobExecutorVo> jobExecutorVoList, JobVo jobVo) {
 		if (!routeType.equals(Constant.ROUTE_TYPE_ALL)) {
-			return triggerExecutorOne(routeType, jobId, logId, method, jobExecutorVoList, jobVo);
+			return triggerExecutorOne(routeType, jobId, logId, method, param, jobExecutorVoList, jobVo);
 		} else {
 			return triggerExecutorAll(jobId, logId, method, jobExecutorVoList);
 		}
 	}
 	
-	private boolean triggerExecutorOne(String routeType, long jobId, long logId, String method, List<JobExecutorVo> jobExecutorVoList, JobVo jobVo) {
+	private boolean triggerExecutorOne(String routeType, long jobId, long logId, String method, String param, List<JobExecutorVo> jobExecutorVoList, JobVo jobVo) {
 		
 		TriggerRoute triggerRoute = triggerRouteMap.get(routeType);
 		
@@ -267,7 +266,7 @@ public class ExecuteTriggerImpl implements ExecuteTrigger {
 				logger.error("triggerExecutorOne -> getJobClient -> return null -> rpcType: {}, ip: {}, port: {}, url: {}", jobExecutorVo.getRpc_Type(), jobExecutorVo.getIp(), jobExecutorVo.getPort(), jobExecutorVo.getUrl());
 				continue;
 			}
-			JobResult jobResult = jobClient.triggerJob(new JobParam(logId, jobExecutorVo.getExecutor_Id(), method));
+			JobResult jobResult = jobClient.triggerJob(new JobParam(logId, jobExecutorVo.getExecutor_Id(), method, param));
 			if (jobResult.getResult()) {
 				if (jobResult.getCode() == Constant.CLIENT_EXE_TRIGGER_SUCCESS) {
 					triggerExecutorRusult(logId, jobExecutorVo.getExecutor_Id(), Constant.EXECUTOR_EXE_STATUS_TRIGGER_SUCCESS, null);

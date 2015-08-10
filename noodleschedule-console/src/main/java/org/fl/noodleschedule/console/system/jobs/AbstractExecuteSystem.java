@@ -4,9 +4,8 @@ public abstract class AbstractExecuteSystem implements ExecuteSystem {
 
 	protected long jobId;
 	protected String jobName;
-	protected String jobType;
+	protected String jobType = "quartz";
 	protected String cron = "0/10 * * * * ?";
-	protected long delayTime = 1;
 	
 	@Override
 	public long getJobId() {
@@ -38,13 +37,5 @@ public abstract class AbstractExecuteSystem implements ExecuteSystem {
 	}
 	public void setCron(String cron) {
 		this.cron = cron;
-	}
-	
-	@Override
-	public long getDelayTime() {
-		return delayTime;
-	}
-	public void setDelayTime(long delayTime) {
-		this.delayTime = delayTime;
 	}
 }

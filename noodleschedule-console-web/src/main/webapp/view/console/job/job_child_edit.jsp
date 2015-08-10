@@ -209,8 +209,12 @@
 			    	<td><input type="text" id="method" maxlength="64"/></td>
 				</tr>
 				<tr>
+					<th><label id="param_Label">执行参数</label></th>
+			    	<td><input type="text" id="param" maxlength="512"/></td>
 					<th><label id="exe_Timeout_Label">超时时间(秒)</label></th>
 			    	<td><input type="text" id="exe_Timeout" maxlength="8" onkeyup="this.value=this.value.replace(/\D/g,'')"/></td>
+				</tr>
+				<tr>
 			    	<th><label id="exe_Retry_Label">执行失败重试</label></th>
 			    	<td>
 			    		<select id="exe_Retry">
@@ -219,8 +223,6 @@
 			    			<option value="2">否</option>
 			    		</select>
 			    	</td>
-				</tr>
-				<tr>
 					<th><label id="timeout_Retry_Label">超时重试</label></th>
 			    	<td>
 			    		<select id="timeout_Retry">
@@ -229,10 +231,10 @@
 			    			<option value="2">否</option>
 			    		</select>
 			    	</td>
-			    	<th><label id="parent_Job_Id_Label">父任务ID</label></th>
-			    	<td><input type="text" id="parent_Job_Id" maxlength="10" onkeyup="this.value=this.value.replace(/\D/g,'')"/></td>
 				</tr>
 				<tr>
+			    	<th><label id="parent_Job_Id_Label">父任务ID</label></th>
+			    	<td><input type="text" id="parent_Job_Id" maxlength="10" onkeyup="this.value=this.value.replace(/\D/g,'')"/></td>
 					<th><label id="status_Label">有效状态</label></th>
 			    	<td>
 			    		<select id="status">
@@ -241,8 +243,6 @@
 			    			<option value="2">无效</option>
 			    		</select>
 			    	</td>
-			    	<th><label>&nbsp;</label></th>
-			    	<td>&nbsp;</td>
 				</tr>
 				<tr>
 			    	<th><label id="description_Label">描述</label></th>

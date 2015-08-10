@@ -62,12 +62,10 @@
 	</bean>
 	
 	<bean id="checkJobRunTimeout" class="org.fl.noodleschedule.core.system.jobs.timeout.CheckJobRunTimeout" >
-		<property name="jobType" value="completion" />
-		<property name="delayTime" value="30" />
+		<property name="cron" value="0/30 * * * * ?" />
 	</bean>
 	
 	<bean id="checkClear" class="org.fl.noodleschedule.core.system.jobs.clear.CheckClear" >
-		<property name="jobType" value="quartz" />
 		<property name="cron" value="0/30 * * * * ?" />
 	</bean>
 	
