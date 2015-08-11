@@ -37,11 +37,6 @@
 	
 	<bean id="executeTrigger" class="org.fl.noodleschedule.core.trigger.ExecuteTriggerImpl" />
 	
-	<bean id="completionDespatcher" class="org.fl.noodleschedule.core.scheduler.completion.CompletionDespatcher" 
-		init-method="start" destroy-method="destroy"> 
-		<property name="threadCount" value="50" />
-	</bean>
-	
 	<bean id="quartzDespatcher" class="org.fl.noodleschedule.core.scheduler.quartz.QuartzDespatcher" 
 		init-method="start" destroy-method="destroy"> 
 	</bean>
@@ -49,7 +44,6 @@
 	<bean id="despatcherMap" class="org.springframework.beans.factory.config.MapFactoryBean">
 		<property name="sourceMap">
 			<map>
-				<entry key="completion" value-ref="completionDespatcher" />
 				<entry key="quartz" value-ref="quartzDespatcher" />
 			</map>
 		</property>
@@ -66,19 +60,17 @@
 	</bean>
 	
 	<bean id="checkJobRunTimeout" class="org.fl.noodleschedule.core.system.jobs.timeout.CheckJobRunTimeout" >
-		<property name="jobType" value="completion" />
-		<property name="delayTime" value="60" />
+		<property name="cron" value="* 0/1 * * * ?" />
 	</bean>
 	
 	<bean id="checkClear" class="org.fl.noodleschedule.core.system.jobs.clear.CheckClear" >
-		<property name="jobType" value="completion" />
-		<property name="delayTime" value="60" />
-		<property name="retentionTime" value="259200" />
+		<property name="cron" value="* 0/1 * * * ?" />
+		<property name="retentionTime" value="1209600" />
 	</bean>
 	
 	<bean id="jobLoader" class="org.fl.noodleschedule.core.loader.JobLoader" />
 	
-	<bean id="dbDistributedLock" class="org.fl.noodleschedule.core.distributedlock.db.DbDistributedLock" 
+	<bean id="dbDistributedLock" class="org.fl.noodle.common.distributedlock.db.DbDistributedLock" 
 		init-method="start" destroy-method="destroy"> 
 		<property name="tableName" value="JC_LOCK" />
 		<property name="lockChangeHandler" ref="jobLoader" />

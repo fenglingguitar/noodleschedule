@@ -12,10 +12,10 @@
 	default-autowire="byName">
 	
 	<bean id="mailSender" class="org.fl.noodleschedule.alarm.device.mail.MailSender" >
-		<property name="sender" value="Autohome JobCenter" />
-		<property name="senderEmail" value="autohome_jobcenter@163.com" />
-		<property name="user" value="autohome_jobcenter" />
-		<property name="password" value="autohome2014" />
+		<property name="sender" value="Noodle Schedule" />
+		<property name="senderEmail" value="noodle_schedule@163.com" />
+		<property name="user" value="noodle_schedule" />
+		<property name="password" value="ogrpcsykwyspxryt" />
 		<property name="smtpHost" value="smtp.163.com" />
 	</bean>
 	
@@ -23,8 +23,7 @@
 		init-method="start" destroy-method="destroy" />
 	
 	<bean id="checkIntervalAlarm" class="org.fl.noodleschedule.alarm.jobs.CheckIntervalAlarm">
-		<property name="jobType" value="completion" />
-		<property name="delayTime" value="60" />
+		<property name="cron" value="* 0/1 * * * ?" />
 	</bean>
 	
 	<bean id="sendLogAlarm" class="org.fl.noodleschedule.alarm.sender.SendLogAlarm" />

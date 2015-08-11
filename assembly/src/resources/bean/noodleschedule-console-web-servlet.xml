@@ -3,9 +3,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
-						http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+						http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd"
 	default-autowire="byName">
 	
 	<context:component-scan base-package="org.fl.noodleschedule.console.web.controller" use-default-filters="false">
@@ -26,43 +26,26 @@
 	
 	<mvc:view-controller path="/" view-name="index"/>
 	
-	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"> 
-		<property name="messageConverters">  
-			<list>  
-				<bean class="org.springframework.http.converter.StringHttpMessageConverter">  
-					<property name="supportedMediaTypes">  
-						<list>  
-							<value>text/html;charset=UTF-8</value>
-						</list>  
-					</property> 
-				</bean>
-			</list>  
-		</property>
-		<property name="customArgumentResolvers">
-			<list>
-				<bean class="org.fl.noodleschedule.console.web.mvc.MethodArgumentResolver"></bean>
-			</list>
-		</property>
-		<property name="customReturnValueHandlers">
-			<list>
-				<bean class="org.fl.noodleschedule.console.web.mvc.MethodReturnValueHandler">
-					<constructor-arg>
-						<list>  
-							<bean class="org.springframework.http.converter.StringHttpMessageConverter">  
-								<property name="supportedMediaTypes">  
-									<list>  
-										<value>text/html;charset=UTF-8</value>
-									</list>  
-								</property> 
-							</bean>
-						</list>  
-					</constructor-arg>
-				</bean>
-			</list>
-		</property>
-	</bean> 
-	
-	<mvc:annotation-driven/>  
+	<mvc:annotation-driven>
+	    <mvc:argument-resolvers>
+	        <bean class="org.fl.noodle.common.mvc.MethodArgumentResolver"></bean>
+	    </mvc:argument-resolvers>
+        <mvc:return-value-handlers>
+	        <bean class="org.fl.noodle.common.mvc.MethodReturnValueHandler">
+				<constructor-arg>
+					<list>  
+						<bean class="org.springframework.http.converter.StringHttpMessageConverter">  
+							<property name="supportedMediaTypes">  
+								<list>  
+									<value>text/html;charset=UTF-8</value>
+								</list>  
+							</property> 
+						</bean>
+					</list>  
+				</constructor-arg>
+			</bean>
+	    </mvc:return-value-handlers>
+	</mvc:annotation-driven>  
 	<mvc:default-servlet-handler/>
 	
 	<mvc:resources location="/common/images/" mapping="/images/**"/>
@@ -70,7 +53,7 @@
 	<mvc:resources location="/common/js/" mapping="/js/**"/>
 	<mvc:resources location="/common/tool/" mapping="/tool/**"/>
     
-  <bean id="exceptionResolver" class="org.fl.noodleschedule.console.web.mvc.ExceptionResolver" >
+  <bean id="exceptionResolver" class="org.fl.noodle.common.mvc.ExceptionResolver" >
   	<constructor-arg>
 		<list>  
 			<bean class="org.springframework.http.converter.StringHttpMessageConverter">  
