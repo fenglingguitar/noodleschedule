@@ -4,7 +4,7 @@
 
   <groupId>org.fl.noodleschedule</groupId>
   <artifactId>noodleschedule</artifactId>
-  <version>1.0.0</version>
+  <version>1.1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>noodleschedule</name>
@@ -23,15 +23,15 @@
   <properties>
   	
   	<noodleschedule.name>noodleschedule</noodleschedule.name>
-  	<noodleschedule.version>1.0.0</noodleschedule.version>
+  	<noodleschedule.version>1.1.0-SNAPSHOT</noodleschedule.version>
   	
-  	<noodleschedule.console.version>1.0.0</noodleschedule.console.version>
-  	<noodleschedule.console.web.version>1.0.0</noodleschedule.console.web.version>
-  	<noodleschedule.core.version>1.0.0</noodleschedule.core.version>
-  	<noodleschedule.client.version>1.0.0</noodleschedule.client.version>
-  	<noodleschedule.util.version>1.0.0</noodleschedule.util.version>
-  	<noodleschedule.alarm.version>1.0.0</noodleschedule.alarm.version>
-  	<noodleschedule.assembly.version>1.0.0</noodleschedule.assembly.version>
+  	<noodleschedule.console.version>1.1.0-SNAPSHOT</noodleschedule.console.version>
+  	<noodleschedule.console.web.version>1.1.0-SNAPSHOT</noodleschedule.console.web.version>
+  	<noodleschedule.core.version>1.1.0-SNAPSHOT</noodleschedule.core.version>
+  	<noodleschedule.client.version>1.1.0-SNAPSHOT</noodleschedule.client.version>
+  	<noodleschedule.util.version>1.1.0-SNAPSHOT</noodleschedule.util.version>
+  	<noodleschedule.alarm.version>1.1.0-SNAPSHOT</noodleschedule.alarm.version>
+  	<noodleschedule.assembly.version>1.1.0-SNAPSHOT</noodleschedule.assembly.version>
   	
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     
@@ -43,43 +43,43 @@
 		<dependency>
 			<groupId>org.fl.noodle.common.util</groupId>
 			<artifactId>noodlecommon-util</artifactId>
-			<version>1.0.0</version>
+			<version>1.1.0-SNAPSHOT</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.fl.noodle.common.net</groupId>
 			<artifactId>noodlecommon-net</artifactId>
-			<version>1.0.0</version>
+			<version>1.1.0-SNAPSHOT</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.fl.noodle.common.mvc</groupId>
 			<artifactId>noodlecommon-mvc</artifactId>
-			<version>1.0.0</version>
+			<version>1.1.0-SNAPSHOT</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.fl.noodle.common.mvc.vo</groupId>
 			<artifactId>noodlecommon-mvc-vo</artifactId>
-			<version>1.0.0</version>
+			<version>1.1.0-SNAPSHOT</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.fl.noodle.common.dynamicsql</groupId>
 			<artifactId>noodlecommon-dynamicsql</artifactId>
-			<version>1.0.0</version>
+			<version>1.1.0-SNAPSHOT</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.fl.noodle.common.dbseparate</groupId>
 			<artifactId>noodlecommon-dbseparate</artifactId>
-			<version>1.0.0</version>
+			<version>1.1.0-SNAPSHOT</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>org.fl.noodle.common.distributedlock.db</groupId>
 			<artifactId>noodlecommon-distributedlock-db</artifactId>
-			<version>1.0.0</version>
+			<version>1.1.0-SNAPSHOT</version>
 		</dependency>
 		
 	    <dependency>

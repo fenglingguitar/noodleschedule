@@ -6,12 +6,12 @@
   <parent>
     <groupId>org.fl.noodleschedule</groupId>
     <artifactId>noodleschedule</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0-SNAPSHOT</version>
   </parent>
   
   <groupId>org.fl.noodleschedule.client</groupId>
   <artifactId>noodleschedule-client</artifactId>
-  <version>1.0.0</version>
+  <version>1.1.0-SNAPSHOT</version>
   <name>noodleschedule-client</name>
   <url>http://maven.apache.org</url>
   
